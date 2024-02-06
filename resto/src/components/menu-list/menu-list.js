@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import MenuListItem from '../menu-list-item';
 import {connect} from 'react-redux';
 import WithRestoServise from '../hoc';
-import {menuLoaded, menuRequested} from '../../actions';
+import {menuLoaded, menuRequested, menuError} from '../../actions';
 import Spinner from '../spinner';
  
 import './menu-list.scss';
@@ -45,7 +45,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   menuLoaded,
-  menuRequested
+  menuRequested,
+  menuError
 }
 
 export default WithRestoServise()(connect(mapStateToProps, mapDispatchToProps)(MenuList));
