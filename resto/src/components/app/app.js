@@ -10,9 +10,8 @@ const App = () => {
     <div style={{background: `url(${Background}) center center/cover no-repeat`}} className="app">
       <AppHeader total={50}/>
       <Routes>
-        <Route path="/" element={<MainPage/>}>
-          <Route path="/cart" element={<CartPage/>}></Route>
-        </Route>
+        <Route path="/" element={<MainPage/>}></Route>
+        <Route path="/cart" element={<CartPage/>}></Route>
       </Routes>
     </div>
   )

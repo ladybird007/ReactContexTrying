@@ -1,24 +1,32 @@
 const menuLoaded = (newMenu) => {
-    return {
-        type: 'MENU_LOADED',
-        payload: newMenu
-    }
+  return {
+    type: 'MENU_LOADED',
+    payload: newMenu
+  }
 };
 
 const menuRequested = () => {
-    return {
-        type: 'MENU_REQUESTED',
-    }
+  return {
+    type: 'MENU_REQUESTED',
+  }
 };
 
 const menuError = () => {
-    return {
-        type: 'MENU_ERROR',
-    }
+  return {
+    type: 'MENU_ERROR',
+  }
+};
+
+const addedToCart = (id) => {
+  return {
+    type: 'ITEM_ADD_TO_CART',
+    payload: id
+  }
 };
 
 export {
+  addedToCart,
+  menuError,
   menuLoaded,
-  menuRequested,
-  menuError
+  menuRequested
 };
