@@ -1,7 +1,8 @@
 const initialState = {
   menu: [],
   loading: true,
-  items: []
+  items: [],
+  total: 0
 }
 
 const reducer = (state = initialState, action) => {
@@ -32,17 +33,24 @@ const reducer = (state = initialState, action) => {
         url: item.url,
         id: item.id
       };
+ 
+      const sumWithInitial = state.items.reduce(
+        (acc, curr) => acc + curr.price,
+        newItem.price
+      );
 
       return {
         ...state,
         items: [
           ...state.items,
           newItem
-        ]
+        ],
+        total: sumWithInitial
       };
     case 'ITEM_DELETE_FROM_CART':
       const idx = action.payload;
       const itemIndex = state.items.findIndex(item => item.id === idx);
+      console.log(itemIndex);
       return {
         ...state,
         items: [
