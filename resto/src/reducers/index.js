@@ -2,7 +2,7 @@ const initialState = {
   menu: [],
   loading: true,
   items: [],
-  total: 0
+  total: 0,
 }
 
 const reducer = (state = initialState, action) => {
@@ -27,13 +27,13 @@ const reducer = (state = initialState, action) => {
     case 'ITEM_ADD_TO_CART': 
       const id = action.payload;
       const item = state.menu.find(item => item.id === id);
-      const newItem = {
+      let newItem = {
         title: item.title,
         price: item.price,
         url: item.url,
-        id: item.id
+        id: item.id,
       };
- 
+
       const sumWithInitial = state.items.reduce(
         (acc, curr) => acc + curr.price,
         newItem.price
@@ -45,18 +45,19 @@ const reducer = (state = initialState, action) => {
           ...state.items,
           newItem
         ],
-        total: sumWithInitial
+        total: sumWithInitial,
       };
+      
     case 'ITEM_DELETE_FROM_CART':
       const idx = action.payload;
-      const itemIndex = state.items.findIndex(item => item.id === idx);
-      console.log(itemIndex);
+      const itemRemove = state.menu.find(item => item.id === idx);
+      const diffWithInitial = state.total - itemRemove.price;
+      const newItems = state.items.filter((item) => item.id !== idx);
+
       return {
         ...state,
-        items: [
-          ...state.items.slice(0, itemIndex),
-          ...state.items.slice(itemIndex + 1)
-        ]
+        items: newItems,
+        total: diffWithInitial
       }
     default: 
       return state;
