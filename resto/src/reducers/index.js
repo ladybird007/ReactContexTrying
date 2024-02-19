@@ -27,24 +27,48 @@ const reducer = (state = initialState, action) => {
     case 'ITEM_ADD_TO_CART': 
       const id = action.payload;
       const item = state.menu.find(item => item.id === id);
-      let newItem = {
-        title: item.title,
-        price: item.price,
-        url: item.url,
-        id: item.id,
-      };
+      const dubler = state.items.find(item => item.id === id);
+      const dublerIndex = state.items.findIndex(item => item.id === id);
+      let newItemsAdd = [];
+
+      if (dubler) {
+        dubler.count +=1;
+        const newDubler = {
+          title: dubler.title,
+          price: item.price * dubler.count,
+          url: dubler.url,
+          id: dubler.id,
+          count: dubler.count
+        }
+        newItemsAdd = [
+          ...state.items.slice(0, dublerIndex),
+          newDubler,
+          ...state.items.slice(dublerIndex + 1)
+        ];
+      } else {
+        const newItem = {
+          title: item.title,
+          price: item.price,
+          url: item.url,
+          id: item.id,
+          count: 1
+        };
+        newItemsAdd = [
+          ...state.items,
+          newItem
+        ];
+      }
 
       const sumWithInitial = state.items.reduce(
-        (acc, curr) => acc + curr.price,
-        newItem.price
+        (total, current) => {
+          return total += current.price
+        },
+        item.price
       );
 
       return {
         ...state,
-        items: [
-          ...state.items,
-          newItem
-        ],
+        items: newItemsAdd,
         total: sumWithInitial,
       };
       

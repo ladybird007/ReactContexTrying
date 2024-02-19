@@ -21,15 +21,18 @@
         border: 1px solid rgba(256,256,256, .2);
         background-color: rgba(0,0,0,.7);
         box-shadow: 0 0 20px rgba(256,256,256, .1);
-        &-title, &-price  {
-            width: 250px;
+        &-title, &-price, &-count  {
+            flex: 1;
             text-align: center;
             color: #fff;
             font-size: 24px;
         }
+        &-title {
+            flex: 2;
+        }
         &-img {
             height: 125px;
-            width: 250px;
+            min-width: 200px;
             object-fit: cover;
         }
     }
