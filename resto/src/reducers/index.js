@@ -74,7 +74,7 @@ const reducer = (state = initialState, action) => {
       
     case 'ITEM_DELETE_FROM_CART':
       const idx = action.payload;
-      const itemRemove = state.menu.find(item => item.id === idx);
+      const itemRemove = state.items.find(item => item.id === idx);
       const diffWithInitial = state.total - itemRemove.price;
       const newItems = state.items.filter((item) => item.id !== idx);
 
